@@ -31,7 +31,7 @@ public class TrelloClient {
     @Autowired
     private RestTemplate restTemplate;
 
-    private URI url() {
+    private URI createUrl() {
 
         URI adress = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/chupacabra_30/boards")
                 .queryParam("key", trelloAppKey)
@@ -43,10 +43,10 @@ public class TrelloClient {
 
     public List<TrelloBoardDto> getTrelloBoards() {
 
-        TrelloBoardDto[] boardsResponse = restTemplate.getForObject(url(), TrelloBoardDto[].class);
+        TrelloBoardDto[] boardsResponse = restTemplate.getForObject(createUrl(), TrelloBoardDto[].class);
 
 
-        TrelloBoardDto[] result = Optional.ofNullable(boardsResponse).orElse(null);
+        TrelloBoardDto[] result = Optional.ofNullable(boardsResponse).orElse(new TrelloBoardDto[]{});
 
         return Arrays.asList(result);
     }
