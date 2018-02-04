@@ -25,7 +25,9 @@ public class TrelloController {
         List<TrelloBoardDto> trelloBoards = trelloClient.getTrelloBoards();
 
 
-        trelloBoards.forEach(trelloBoardDto -> {
+        trelloBoards.stream()
+                .filter(s->s.getId().length()>0 && !(s.getId().equals("0")) && s.getName().length()>0)
+                .forEach(trelloBoardDto -> {
             System.out.println(trelloBoardDto.getName() + " - " + trelloBoardDto.getId());
             System.out.println("This board contains lists: ");
 
