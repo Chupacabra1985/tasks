@@ -32,7 +32,8 @@ public class CreatedTrelloCard {
     private int card;
 
     @JsonProperty("badges")
-    private List<TrelloBadgesDto> badges;
+    private TrelloBadgesDto badges;
+
 
     public CreatedTrelloCard() {
 

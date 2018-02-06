@@ -14,6 +14,7 @@ public class TrelloBadgesDto {
     @JsonProperty("votes")
     private int votes;
 
+
     public TrelloBadgesDto() {
 
     }
