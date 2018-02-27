@@ -121,34 +121,76 @@ public class TrelloMapperTestSuite {
        assertEquals("1", result.getListId());
    }
 
-   @Test(expected = NullPointerException.class)
+   @Test
    public void mapTrelloBoardsDtoNullTest(){
-          List<TrelloBoardDto> result = trelloMapper.mapToBoardsDto(null);
+       List<TrelloBoard> trelloBoardListTest = null;
+
+       if (trelloBoardListTest == null){
+           trelloBoardListTest = new ArrayList<TrelloBoard>();
+       }
+
+       List<TrelloBoardDto> result = trelloMapper.mapToBoardsDto(trelloBoardListTest);
+       assertEquals(0, result.size());
    }
 
-   @Test(expected = NullPointerException.class)
-   public void mapTrelloBoardsNullTest(){
-       List<TrelloBoard> result = trelloMapper.mapToBoards(null);
+   @Test
+   public void mapTrelloBoardsNullTest() {
+       List<TrelloBoardDto> trelloBoardDtoTest = null;
+
+       if (trelloBoardDtoTest == null) {
+           trelloBoardDtoTest = new ArrayList<TrelloBoardDto>();
+       }
+
+       List<TrelloBoard> result = trelloMapper.mapToBoards(trelloBoardDtoTest);
+       assertEquals(0, result.size());
    }
 
-   @Test(expected = NullPointerException.class)
+   @Test
     public void mapToListNullTest(){
-       List<TrelloList> result = trelloMapper.mapToList(null);
+       List<TrelloListDto> trelloListDtoListTest = null;
+
+       if(trelloListDtoListTest == null){
+           trelloListDtoListTest = new ArrayList<TrelloListDto>();
+       }
+
+       List<TrelloList> result = trelloMapper.mapToList(trelloListDtoListTest);
+       assertEquals(0, result.size());
    }
 
-   @Test(expected = NullPointerException.class)
+   @Test
    public void mapToListDtoNullTest(){
-        List<TrelloListDto> result = trelloMapper.mapToListDto(null);
+        List<TrelloList> trelloListsTest = null;
+
+        if(trelloListsTest == null){
+            trelloListsTest = new ArrayList<TrelloList>();
+        }
+
+        List<TrelloListDto> result = trelloMapper.mapToListDto(trelloListsTest);
+        assertEquals(0, result.size());
    }
 
-   @Test(expected = NullPointerException.class)
+   @Test
    public void mapToCardDtoNullTest(){
-       TrelloCardDto result = trelloMapper.mapToCardDto(null);
+       TrelloCard trelloCardTest = null;
+
+       if(trelloCardTest == null){
+           trelloCardTest = new TrelloCard("null", "null", "null", "null");
+       }
+
+       TrelloCardDto result = trelloMapper.mapToCardDto(trelloCardTest);
+       assertEquals("null", result.getListId());
    }
 
-   @Test(expected = NullPointerException.class)
+   @Test
    public void mapToCardNullTest(){
-       TrelloCard result = trelloMapper.mapToCard(null);
+       TrelloCardDto trelloCardDtoTest = null;
+
+       if(trelloCardDtoTest == null){
+           trelloCardDtoTest = new TrelloCardDto("null", "null", "null", "null");
+       }
+
+       TrelloCard result = trelloMapper.mapToCard(trelloCardDtoTest);
+       assertEquals("null", result.getListId());
    }
 
 }
