@@ -123,17 +123,25 @@ public class TrelloMapperTestSuite {
 
    @Test
    public void mapTrelloBoardsDtoNullTest(){
+       //Given
        List<TrelloBoard> trelloBoardListTest = null;
 
+       //When
        List<TrelloBoardDto> result = trelloMapper.mapToBoardsDto(trelloBoardListTest);
+
+       //Then
        assertEquals(new ArrayList<>(), result);
    }
 
    @Test
    public void mapTrelloBoardsNullTest() {
+       //Given
        List<TrelloBoardDto> trelloBoardDtoTest = null;
 
+       //When
        List<TrelloBoard> result = trelloMapper.mapToBoards(trelloBoardDtoTest);
+
+       //Then
        assertEquals(new ArrayList<>(), result);
    }
 
@@ -147,25 +155,37 @@ public class TrelloMapperTestSuite {
 
    @Test
    public void mapToListDtoNullTest(){
+        //Given
         List<TrelloList> trelloListsTest = null;
 
+        //When
         List<TrelloListDto> result = trelloMapper.mapToListDto(trelloListsTest);
+
+        //Then
         assertEquals(new ArrayList<>(), result);
    }
 
    @Test
    public void mapToCardDtoNullTest(){
+       //Given
        TrelloCard trelloCardTest = null;
 
+       //When
        TrelloCardDto result = trelloMapper.mapToCardDto(trelloCardTest);
+
+       //Then
        assertEquals(null, result);
    }
 
    @Test
    public void mapToCardNullTest(){
+       //Given
        TrelloCardDto trelloCardDtoTest = null;
 
+       //When
        TrelloCard result = trelloMapper.mapToCard(trelloCardDtoTest);
+
+       //Then
        assertEquals(null, result);
    }
 
