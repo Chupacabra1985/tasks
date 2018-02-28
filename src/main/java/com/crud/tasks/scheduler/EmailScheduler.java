@@ -14,14 +14,21 @@ public class EmailScheduler{
 
     private static final String SUBJECT = "Tasks: Once a day email";
 
-    @Autowired
+
     private SimpleEmailService simpleEmailService;
 
-    @Autowired
+
     private TaskRepository taskRepository;
 
-    @Autowired
+
     private AdminConfig adminConfig;
+
+    @Autowired
+    public EmailScheduler(SimpleEmailService simpleEmailService, TaskRepository taskRepository, AdminConfig adminConfig) {
+        this.simpleEmailService = simpleEmailService;
+        this.taskRepository = taskRepository;
+        this.adminConfig = adminConfig;
+    }
 
     public String singlePlural(long count, String single, String plural){
         return count==1 ? single : plural;

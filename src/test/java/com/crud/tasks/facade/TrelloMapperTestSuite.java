@@ -125,72 +125,48 @@ public class TrelloMapperTestSuite {
    public void mapTrelloBoardsDtoNullTest(){
        List<TrelloBoard> trelloBoardListTest = null;
 
-       if (trelloBoardListTest == null){
-           trelloBoardListTest = new ArrayList<TrelloBoard>();
-       }
-
        List<TrelloBoardDto> result = trelloMapper.mapToBoardsDto(trelloBoardListTest);
-       assertEquals(0, result.size());
+       assertEquals(new ArrayList<>(), result);
    }
 
    @Test
    public void mapTrelloBoardsNullTest() {
        List<TrelloBoardDto> trelloBoardDtoTest = null;
 
-       if (trelloBoardDtoTest == null) {
-           trelloBoardDtoTest = new ArrayList<TrelloBoardDto>();
-       }
-
        List<TrelloBoard> result = trelloMapper.mapToBoards(trelloBoardDtoTest);
-       assertEquals(0, result.size());
+       assertEquals(new ArrayList<>(), result);
    }
 
    @Test
     public void mapToListNullTest(){
        List<TrelloListDto> trelloListDtoListTest = null;
 
-       if(trelloListDtoListTest == null){
-           trelloListDtoListTest = new ArrayList<TrelloListDto>();
-       }
-
        List<TrelloList> result = trelloMapper.mapToList(trelloListDtoListTest);
-       assertEquals(0, result.size());
+       assertEquals(new ArrayList<>(), result);
    }
 
    @Test
    public void mapToListDtoNullTest(){
         List<TrelloList> trelloListsTest = null;
 
-        if(trelloListsTest == null){
-            trelloListsTest = new ArrayList<TrelloList>();
-        }
-
         List<TrelloListDto> result = trelloMapper.mapToListDto(trelloListsTest);
-        assertEquals(0, result.size());
+        assertEquals(new ArrayList<>(), result);
    }
 
    @Test
    public void mapToCardDtoNullTest(){
        TrelloCard trelloCardTest = null;
 
-       if(trelloCardTest == null){
-           trelloCardTest = new TrelloCard("null", "null", "null", "null");
-       }
-
        TrelloCardDto result = trelloMapper.mapToCardDto(trelloCardTest);
-       assertEquals("null", result.getListId());
+       assertEquals(null, result);
    }
 
    @Test
    public void mapToCardNullTest(){
        TrelloCardDto trelloCardDtoTest = null;
 
-       if(trelloCardDtoTest == null){
-           trelloCardDtoTest = new TrelloCardDto("null", "null", "null", "null");
-       }
-
        TrelloCard result = trelloMapper.mapToCard(trelloCardDtoTest);
-       assertEquals("null", result.getListId());
+       assertEquals(null, result);
    }
 
 }
