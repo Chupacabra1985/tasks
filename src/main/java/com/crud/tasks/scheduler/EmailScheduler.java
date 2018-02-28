@@ -11,16 +11,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class EmailScheduler{
-
     private static final String SUBJECT = "Tasks: Once a day email";
-
-
     private SimpleEmailService simpleEmailService;
-
-
     private TaskRepository taskRepository;
-
-
     private AdminConfig adminConfig;
 
     @Autowired

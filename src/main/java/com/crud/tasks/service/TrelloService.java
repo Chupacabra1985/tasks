@@ -15,17 +15,18 @@ import static java.util.Optional.ofNullable;
 
 @Service
 public class TrelloService {
-
-    @Autowired
     private AdminConfig adminConfig;
-
-    @Autowired
     private TrelloClient trelloClient;
-
-    @Autowired
     private SimpleEmailService emailService;
 
     private static final String SUBJECT = "Tasks: New Trello card";
+
+    @Autowired
+    public TrelloService(AdminConfig adminConfig, TrelloClient trelloClient, SimpleEmailService emailService) {
+        this.adminConfig = adminConfig;
+        this.trelloClient = trelloClient;
+        this.emailService = emailService;
+    }
 
     public List<TrelloBoardDto> fetchTrelloBoards(){
         return trelloClient.getTrelloBoards();

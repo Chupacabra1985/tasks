@@ -5,6 +5,7 @@ import com.crud.tasks.repository.TaskRepository;
 import com.crud.tasks.service.DbService;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +69,19 @@ public class DbServiceTestSuite {
 
         //Then
         Assert.assertNull(resultGetTask);
+    }
+
+    @Test
+    public void testDeleteTask(){
+        //Given
+        TaskRepository repository = mock(TaskRepository.class);
+        DbService dbService = new DbService(repository);
+
+        //When
+        dbService.deleteTask(anyLong());
+
+        //Then
+        Mockito.verify(repository, Mockito.times(1)).deleteById(anyLong());
     }
 
 }
