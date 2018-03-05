@@ -11,6 +11,7 @@ import org.mockito.ArgumentMatchers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -37,7 +38,7 @@ public class TaskControllerTest {
     @MockBean
     private DbService dbService;
 
-    @MockBean
+    @SpyBean
     private TaskMapper taskMapper;
 
     @Test
@@ -70,15 +71,19 @@ public class TaskControllerTest {
 
         //When & Then
         mockMvc.perform(get("/v1/task/getTask?taskId=1"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.title", is("test")))
+                .andExpect(jsonPath("$.content", is("test")));
+
         verify(dbService, times(1)).getTask(1L);
     }
 
     @Test
     public void getTaskTestNull() throws Exception {
         //When & Then
-       // mockMvc.perform(get("/v1/task/getTask?taskId=1"));
-               // .andExpect(status().is(500));  ??
+       mockMvc.perform(get("/v1/task/getTask?taskId=1"))
+               .andExpect(status().is(500));
     }
 
     @Test
@@ -108,23 +113,29 @@ public class TaskControllerTest {
         //when & Then
         mockMvc.perform(put("/v1/task/updateTask").contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
-                .content(jsonContent));
+                .content(jsonContent))
+                .andExpect(jsonPath("$.id", is(2)))
+                .andExpect(jsonPath("$.title", is("test_update")))
+                .andExpect(jsonPath("$.content", is("test_update")));
 
     }
 
     @Test
     public void createTask() throws Exception {
         //Given
-        Task task1 = new Task(2L, "test_update", "test_update");
+        Task task1 = new Task(1L, "test_update", "test_update");
 
         when(dbService.saveTask(ArgumentMatchers.any(Task.class))).thenReturn(task1);
 
         Gson gson = new Gson();
         String jsonContent = gson.toJson(task1);
+
         //When & Then
         mockMvc.perform(post("/v1/task/createTask").contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
-                .content(jsonContent));
+                .content(jsonContent))
+                .andExpect(status().isOk());
+
     }
 }
 
