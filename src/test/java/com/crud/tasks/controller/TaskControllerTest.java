@@ -80,13 +80,6 @@ public class TaskControllerTest {
     }
 
     @Test
-    public void getTaskTestNull() throws Exception {
-        //When & Then
-       mockMvc.perform(get("/v1/task/getTask?taskId=1"))
-               .andExpect(status().is(500));
-    }
-
-    @Test
     public void deleteTaskTest() throws Exception {
         //Given
         Task task = new Task(1L, "test", "test");
