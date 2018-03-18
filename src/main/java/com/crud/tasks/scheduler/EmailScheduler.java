@@ -3,6 +3,7 @@ package com.crud.tasks.scheduler;
 import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.domain.Mail;
 import com.crud.tasks.repository.TaskRepository;
+import com.crud.tasks.service.MailIfoCreatorService;
 import com.crud.tasks.service.SimpleEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,23 +16,20 @@ public class EmailScheduler{
     private SimpleEmailService simpleEmailService;
     private TaskRepository taskRepository;
     private AdminConfig adminConfig;
+    private MailIfoCreatorService mailIfoCreatorService;
 
     @Autowired
-    public EmailScheduler(SimpleEmailService simpleEmailService, TaskRepository taskRepository, AdminConfig adminConfig) {
+    public EmailScheduler(SimpleEmailService simpleEmailService, TaskRepository taskRepository, AdminConfig adminConfig, MailIfoCreatorService mailIfoCreatorService) {
         this.simpleEmailService = simpleEmailService;
         this.taskRepository = taskRepository;
         this.adminConfig = adminConfig;
-    }
-
-    public String singlePlural(long count, String single, String plural){
-        return count==1 ? single : plural;
+        this.mailIfoCreatorService = mailIfoCreatorService;
     }
 
     @Scheduled(cron="0 0 10 * * *")
     public void sendInformationEmail(){
         long size = taskRepository.count();
-        simpleEmailService.send(new Mail(adminConfig.getAdminMail(), "", SUBJECT, "Currently in database you got: "
-        + size + singlePlural(size, "task", "tasks")));
+        simpleEmailService.send(new Mail(adminConfig.getAdminMail(), "", SUBJECT, mailIfoCreatorService.buildInfoCardEmail()));
     }
 
 }
