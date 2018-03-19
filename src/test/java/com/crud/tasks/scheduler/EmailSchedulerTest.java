@@ -2,6 +2,7 @@ package com.crud.tasks.scheduler;
 
 import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.repository.TaskRepository;
+import com.crud.tasks.service.MailIfoCreatorService;
 import com.crud.tasks.service.SimpleEmailService;
 import org.junit.Test;
 import org.mockito.ArgumentMatchers;
@@ -15,8 +16,9 @@ public class EmailSchedulerTest {
         SimpleEmailService mockSimpleEmailService = Mockito.mock(SimpleEmailService.class);
         TaskRepository mockTaskRepository = Mockito.mock(TaskRepository.class);
         AdminConfig mockAdminConfig = Mockito.mock(AdminConfig.class);
+        MailIfoCreatorService mockMailInfoCreatorService = Mockito.mock(MailIfoCreatorService.class);
 
-        EmailScheduler emailScheduler = new EmailScheduler(mockSimpleEmailService, mockTaskRepository, mockAdminConfig);
+        EmailScheduler emailScheduler = new EmailScheduler(mockSimpleEmailService, mockTaskRepository, mockAdminConfig, mockMailInfoCreatorService);
 
         //When
         emailScheduler.sendInformationEmail();
