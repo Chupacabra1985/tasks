@@ -18,10 +18,10 @@ public class ControllerTestSuite {
     @Test
     public void testGetTask() throws TaskNotFoundException {
         //Then
-        TaskDto readTask = taskController.getTask((long)2);
+        TaskDto readTask = taskController.getTask(16L);
         long id = readTask.getId();
 
-        Assert.assertEquals(id, 2L);
+        Assert.assertEquals(id, 16L);
 
     }
 

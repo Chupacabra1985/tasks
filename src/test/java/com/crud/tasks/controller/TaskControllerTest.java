@@ -70,7 +70,7 @@ public class TaskControllerTest {
         when(dbService.getTask(1L)).thenReturn(Optional.of(task));
 
         //When & Then
-        mockMvc.perform(get("/v1/tasks/{1}"))
+        mockMvc.perform(get("/v1/tasks/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.title", is("test")))
@@ -88,7 +88,7 @@ public class TaskControllerTest {
         doNothing().when(dbService).deleteTask(task.getId());
 
         //When & Then
-        mockMvc.perform(delete("/v1/tasks/{1}").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(delete("/v1/tasks/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         verify(dbService, times(1)).deleteTask(task.getId());
 
